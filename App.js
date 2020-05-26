@@ -47,7 +47,8 @@ export default function App() {
 
   async function takePicture () {
     if (camRef) {
-      let photo = await camRef.takePictureAsync();
+      let photo = await camRef.current.takePictureAsync();
+      console.log(photo.uri)
     }
   }
 
@@ -55,6 +56,7 @@ export default function App() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
     });
+    console.log(result)
   }
 
   if (hasPermission === null) {
@@ -86,7 +88,8 @@ export default function App() {
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                   backgroundColor: 'transparent',
-                }}>
+                }}
+                onPress = {takePicture}>
                 <FontAwesome
                     name="camera"
                     style={{ color: "#fff", fontSize: 40}}
